@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="{{Settings::get('site_language')}}" class="no-js">
+<head>
+	{{$insert_head}}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/png" href="f/design/favicon.png">
+	<link rel="apple-touch-icon" href="f/design/appicon.png">
+	{{$insert_css}}
+	{{$insert_js}}
+</head>
+
+<body>
+	<header>
+		<div class="row">
+			<div class="small-8 medium-4 columns">
+				<a href="/" title="{{Settings::get('site_name')}}" class="logo"><img src="f/design/logo.png" alt="{{Settings::get('site_name')}}"></a>
+			</div>
+
+			<div class="medium-8 columns">
+				<div class="opening-hours">
+					<div class="heading">Åbningstider:</div>
+					<div class="content">Mandag - Fredag: 9-20<br/>Lørdag: 9-15</div>
+				</div>
+			</div>
+		</div>	
+		
+		<div class="nav-wrap">
+			<div class="row">
+				<div class="small-12 columns">
+					<nav class="main">{{widget module="content" name="menu" depth="2"}}</nav>
+				</div>
+			</div>
+		</div>
+
+		<div class="hide-for-medium-up">
+			<a href="javascript:void(0)" class="main-nav-toggle">
+				<div class="hamburger"> 
+					<div class="hamburger-i hamburger-top"></div> 
+					<div class="hamburger-i hamburger-mid"></div> 
+					<div class="hamburger-i hamburger-bottom"></div> 
+				</div>
+			</a>
+		</div>
+	</header>
+	
+	{{capture assign="top"}}{{widget module="content" name="pocket" id="5"}}{{/capture}}
+
+	{{if $top}}
+		<div class="top">
+			<div class="row">
+				<div class="small-12 columns">{{widget module="content" name="pocket" id="5"}}</div>
+			</div>
+		</div>
+	{{/if}}
+
+	{{capture assign="subnav"}}{{widget module="content" name="menu" start="1"}}{{/capture}}
+	{{capture assign="sidebar"}}{{widget module="content" name="pocket" id="3"}}{{/capture}}
+
+	<div class="middle">
+		<div class="row">
+			{{if $sidebar || $subnav}}
+				<div class="medium-4 large-3 columns">
+					<section class="sidebar">
+						{{if $subnav}}<nav>{{$subnav}}</nav>{{/if}}
+						{{$sidebar}}
+					</section>
+				</div>
+
+				<div class="medium-8 large-9 columns">
+					<section class="content">{{$content}}</section>
+				</div>
+			{{else}}
+				<div class="small-12 columns">
+					<section class="content full">{{$content}}</section>
+				</div>
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="bottom">
+		<div class="row">
+			<div class="small-12 columns">{{widget module="content" name="pocket" id="7"}}</div>
+		</div>
+	</div>
+
+	<footer>{{widget module="content" name="pocket" id="1"}}</footer>
+
+	{{$insert_body}}
+
+	<!-- Facebook -->
+	<div id="fb-root"></div><script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/da_DK/sdk.js#xfbml=1&version=v2.4"; fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+
+	<script src="/assets/foundation/{{Settings::get('plugin_foundation')}}/js/foundation/foundation.js"></script>
+	<script src="/assets/foundation/{{Settings::get('plugin_foundation')}}/js/foundation/foundation.equalizer.js"></script>
+	<script src="/assets/foundation/{{Settings::get('plugin_foundation')}}/js/foundation/foundation.interchange.js"></script>
+	<script>$(document).foundation({});</script>
+</body>
+</html>
